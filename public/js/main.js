@@ -3,21 +3,25 @@ import * as date from "./modules/handledDate.js";
 let display_list = document.getElementById('display_list');
 document.addEventListener('keypress',createToDo);
 document.getElementById('btn_send').addEventListener('click',createToDo);
-
-function createToDo(e){
-    console.log(e);
+function disabledAllInput(){
+    for (let i = 0; i < display_list.children.length; i++) {
+        console.log(display_list.children[i].children[0]);
+        display_list.children[i].children[0].disabled = true;
+        
+    }
+}
+function createToDo(e){  // fonction qui cree chaque todo item et ses outils
+    if((e.key == 'Enter')){
+        disabledAllInput(); 
+    }
+    
     let input = document.getElementById('input_text');
-    if((e.key == 'Enter' || e.target.innerHTML== "send") && input.value != ''){
+    if((e.key == 'Enter' || e.target.innerHTML== "send") && input.value != ''){  // verifie qu on touhce sur enter et que il y a qqch dans l'input
         let todo = document.createElement('input');
-        // todo.classList.add('undone');
-        todo.addEventListener('click',function(e){
-            console.log(e);
-            this.disabled = 'false';
-        })
-       
+        
+  
         let modifs = document.createElement('div');
         modifs.id = 'modifs_controls';
-        //modifs.innerHTML= `<i class="fa-solid fa-trash-can" ></i> <i id="done" class="fa-solid fa-check" ></i>`;
 
      
         let delete_btn = document.createElement('div');
@@ -42,8 +46,11 @@ function createToDo(e){
         })
 
         delete_btn.addEventListener('click',function(e){
+            let secure = confirm('etes vous sur ?');
+            if (secure){
+                e.path[4].removeChild(e.path[3]);
+            }
             
-            e.path[4].removeChild(e.path[3]);
         })
 
   
@@ -53,9 +60,14 @@ function createToDo(e){
         todo.value = input.value;
         todo.disabled = 'true';
         todo.classList.add('todo_style');
+        todo_box.addEventListener('dblclick',function(e){
+            console.log(e);
+            e.path[0].disabled = false;
+            
+        })
 
         display_list.appendChild(todo_box);
-        input.value = '';
+        input.value = ''; // on reset l input
     }
     
 
