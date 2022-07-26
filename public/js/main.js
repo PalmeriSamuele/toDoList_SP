@@ -9,26 +9,31 @@ function createToDo(e){
     let input = document.getElementById('input_text').value;
     if((e.key == 'Enter' || e.target.innerHTML== "send") && input != ''){
         let todo = document.createElement('input');
-        let dots = document.createElement('div');
+        todo.classList.add('undone');
+        todo.addEventListener('dblclick',function(e){
+            console.log(e);
+            todo.disabled = 'false';
+        })
+       
         let modifs = document.createElement('div');
         modifs.id = 'modifs_controls';
+        //modifs.innerHTML= `<i class="fa-solid fa-trash-can" ></i> <i id="done" class="fa-solid fa-check" ></i>`;
 
-        let delete_btn = document.createElement('p');
-        delete_btn.innerHTML = `<i class="fa-solid fa-circle-trash"></i>`;
-        let rename_btn = document.createElement('p');
-        rename_btn.innerHTML = `<i class="fa-solid fa-input-numeric"></i>`;
-        let done_btn = document.createElement('p');
-        done_btn.innerHTML = `<i class="fa-solid fa-badge-check"></i>`;
-        modifs.append(delete_btn,rename_btn,done_btn);
+     
+        let delete_btn = document.createElement('div');
+        delete_btn.innerHTML = `<i class="fa-solid fa-trash-can"></i>`;
+        let done_btn = document.createElement('div');
+        done_btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
+        modifs.append(delete_btn,done_btn);
 
-        dots.classList.add('dots_style')
-        dots.addEventListener('click',function(){
-
+        done_btn.addEventListener('click',function(e){
+            console.log(e);
         })
+
+  
         let todo_box = document.createElement('div');
         todo_box.classList.add('todo_box_style');
-        todo_box.append(todo,dots,modifs);
-        dots.innerHTML = '<i class="fa-solid fa-ellipsis-vertical"></i>';
+        todo_box.append(todo,modifs);
         todo.value = input;
         todo.disabled = 'true';
         todo.classList.add('todo_style');
