@@ -134,9 +134,9 @@ textarea, input { outline: none; }
 }
 
 .done{
-    background-color: red;
+    color: white;
+    background-color: rgb(87, 90, 78);
 }
 
-.undone{
-    background-color: green;
-}
+
+

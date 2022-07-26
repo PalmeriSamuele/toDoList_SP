@@ -9,10 +9,10 @@ function createToDo(e){
     let input = document.getElementById('input_text').value;
     if((e.key == 'Enter' || e.target.innerHTML== "send") && input != ''){
         let todo = document.createElement('input');
-        todo.classList.add('undone');
-        todo.addEventListener('dblclick',function(e){
+        // todo.classList.add('undone');
+        todo.addEventListener('click',function(e){
             console.log(e);
-            todo.disabled = 'false';
+            this.disabled = 'false';
         })
        
         let modifs = document.createElement('div');
@@ -28,6 +28,21 @@ function createToDo(e){
 
         done_btn.addEventListener('click',function(e){
             console.log(e);
+            if(e.target.className != 'fa-solid fa-rotate-left'){
+                e.target.className = 'fa-solid fa-rotate-left';
+            }
+            else{
+                e.target.className = 'fa-solid fa-check';
+            }
+            
+            e.path[3].children[0].classList.toggle('done');
+    
+           
+        })
+
+        delete_btn.addEventListener('click',function(e){
+            
+            e.path[4].removeChild(e.path[3]);
         })
 
   
@@ -42,3 +57,5 @@ function createToDo(e){
     }
     
 }
+
+let filtre_all = document.getElementById('')
