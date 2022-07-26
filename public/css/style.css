@@ -127,7 +127,8 @@ textarea, input { outline: none; }
     gap: 1rem;
     padding: 1rem;
     position: absolute;
-    right: -20%;
+    right: 0%;
+    margin-left: 1rem;
     
    
     
